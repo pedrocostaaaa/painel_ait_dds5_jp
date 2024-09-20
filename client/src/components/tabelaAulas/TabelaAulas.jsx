@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import AbreviaData from "./AbreviaData";
 import AbreviaAmbiente from "./AbreviaAmbiente";
+import styles from './TabelaAulas.module.css';
 
 function TabelaAulas() {
     const [aulas, setAulas] = useState([])
@@ -28,15 +29,18 @@ function TabelaAulas() {
         }
     }
     return (
-        <div>
-            <table>
+        <div className={styles.aulas}>
+            <table className={styles.tabelaAulas}>
                 <thead>
-                    <th>Início</th>
-                    <th>Fim</th>
-                    <th>Turma</th>
-                    <th>Instrutor</th>
-                    <th>Unidade Curricular</th>
-                    <th>Ambiente</th>
+                    <tr>
+                        <th>Início</th>
+                        <th>Fim</th>
+                        <th>Turma</th>
+                        <th>Instrutor</th>
+                        <th>Unidade Curricular</th>
+                        <th>Ambiente</th>
+                    </tr>
+
                 </thead>
                 <tbody>
                     {aulas.map((aula) => (
