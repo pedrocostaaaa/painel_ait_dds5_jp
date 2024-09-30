@@ -1,0 +1,19 @@
+.cabecalho{
+    background-color: #f2f2f2;
+}
+
+.cabecalho .rosa:hover{
+    color: pink;
+}
+
+.conteudo {
+    background-color: gray;
+}
+
+.perfumaria{
+    background-color: pink;
+}
+
+.artigos{
+    background-color: rgb(41, 192, 230);
+}
