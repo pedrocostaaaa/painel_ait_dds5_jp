@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Navbar.module.css';
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -13,9 +14,10 @@ function Navbar() {
         </button>
         <div id='menu' className='collapse navbar-collapse text-center'>
           <ul className='navbar-nav mx-auto'>
-            <li className="navbar-item"><a className="nav-link" href=""> Início</a></li>
-            <li className="navbar-item"><a className="nav-link" href=""> Gestão Usuário</a></li>
-            <li className="navbar-item"><a className="nav-link" href=""> Import CSV</a></li>
+            <li className="navbar-item"><NavLink className="nav-link" to=""> Início</NavLink></li>
+            <li className="navbar-item"><NavLink className="nav-link" to="/gestao_usuario"> Gestão Usuário</NavLink></li>
+            <li className="navbar-item"><NavLink className="nav-link" to="/import_csv"> Import CSV</NavLink></li>
+            <li className="navbar-item"><NavLink className="nav-link" to="/gestao_aulas"> Gestão Aulas</NavLink></li>
           </ul>
         </div>
       </nav>
