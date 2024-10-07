@@ -43,17 +43,6 @@
       "unidade_curricular": "DORMIR",
       "ambiente": "QUARTO",
       "chave": null
-    },
-    {
-      "id": "aa5f",
-      "data": "2025-06-04",
-      "data_hora_inicio": "09:00",
-      "data_hora_fim": "11:00",
-      "turma": "014",
-      "instrutor": "PEDRO COSTA",
-      "unidade_curricular": "DORMIR",
-      "ambiente": "QUARTO",
-      "chave": null
     }
   ],
   "imagens": [

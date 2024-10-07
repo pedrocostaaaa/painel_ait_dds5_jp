@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import Navbar from '../layout/Navbar';
+import React, { useEffect, useState } from 'react';
 
-function FormAula() {
+function FormAula({ titulo, textoBotao, handleSubmit, id }) {
   const [dataAula, setDataAula] = useState('');
   const [horaInicio, setHoraInicio] = useState('');
   const [horaFim, setHoraFim] = useState('');
@@ -10,10 +9,34 @@ function FormAula() {
   const [unidadeCurricular, setUnidadeCurricular] = useState('');
   const [ambiente, setAmbiente] = useState('');
 
+  useEffect(() => {
+    if(id){
+    baixarAula(id)
+    }
+  }, []);
 
-  async function cadastrarAula(e) {
+  async function baixarAula(id) {
+    try {
+      const resposta = await fetch(`http://localhost:5000/aulas/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!resposta.ok) {
+        throw new Error('Erro ao buscar aula');
+      } else {
+        console.log(JSON.stringify(resposta));
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  function submit(e) {
     e.preventDefault();
-    const infoAula = {
+    const aula = {
       data: dataAula,
       data_hora_inicio: horaInicio,
       data_hora_fim: horaFim,
@@ -22,33 +45,16 @@ function FormAula() {
       unidade_curricular: unidadeCurricular,
       ambiente: ambiente,
       chave: null
-    };
-
-    try {
-
-      const resposta = fetch('http://localhost:5000/aulas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(infoAula)
-      });
-
-      if (!resposta.ok) {
-        console.log('Erro ao cadastrar aula');
-      } else {
-        alert('Aula cadastrada com sucesso');
-      }
-
-    } catch (error) {
-      console.error('Erro ao cadastrar aula', error)
     }
+    handleSubmit(aula);
   }
 
   return (
     <>
 
       <div className='container col-sm-12 col-md-6  col-lg-3 mt-3'>
-        <h2 className='text-center'>Cadastro Aula</h2>
-        <form onSubmit={cadastrarAula}>
+        <h2 className='text-center'>{titulo}</h2>
+        <form onSubmit={submit}>
 
           <label className="form-label" htmlFor="">Data:</label>
           <input
@@ -121,7 +127,7 @@ function FormAula() {
           />
 
           <a className="btn btn-danger mt-3 float-start" href="">Cancelar</a>
-          <button className="btn btn-success mt-3 float-end" type="submit">Salvar</button>
+          <button className="btn btn-success mt-3 float-end" type="submit">{textoBotao}</button>
         </form>
       </div>
     </>
