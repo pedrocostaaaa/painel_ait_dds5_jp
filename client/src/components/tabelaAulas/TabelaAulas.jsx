@@ -4,7 +4,7 @@ import AbreviaAmbiente from "./AbreviaAmbiente";
 import styles from './TabelaAulas.module.css';
 import { Link } from "react-router-dom";
 
-function TabelaAulas({ tipo }) {
+function TabelaAulas({ tipo, onDeleteSuccess }) {
     const [aulas, setAulas] = useState([])
 
     useEffect(() => {
@@ -43,7 +43,8 @@ function TabelaAulas({ tipo }) {
                 throw new Error('Erro ao deletar aula', JSON.stringify(resposta));
             } else {
                 setAulas(aulas.filter(aula => aula.id !== id));
-                alert('Aula deletada')
+                //alert('Aula deletada')
+                onDeleteSuccess();
             }
         } catch (error) {
             console.debug(error);
@@ -75,13 +76,13 @@ function TabelaAulas({ tipo }) {
                             <td>{aula.unidade_curricular}</td>
                             <td>{aula.ambiente}</td>
                             {tipo === 'edit' &&
-                             <td>
-                                <Link to={`/edit_aula/${aula.id}`} className="btn btn-warning">Editar</Link>
-                                <button
-                                    className="btn btn-danger ms-2"
-                                    onClick={() => deletarAulas(aula.id)}
-                                >Deletar</button>
-                            </td>}
+                                <td>
+                                    <Link to={`/edit_aula/${aula.id}`} className="btn btn-warning">Editar</Link>
+                                    <button
+                                        className="btn btn-danger ms-2"
+                                        onClick={() => deletarAulas(aula.id)}
+                                    >Deletar</button>
+                                </td>}
                         </tr>
                     ))}
                 </tbody>
