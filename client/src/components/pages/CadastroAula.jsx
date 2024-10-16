@@ -27,7 +27,7 @@ function CadastroAula() {
 
     return (
         <div>
-            <Navbar />
+            <Header />
             <FormAula titulo='Cadastrar aula' textoBotao='Cadastrar' handleSubmit={cadastrarAula} />
         </div>
     )

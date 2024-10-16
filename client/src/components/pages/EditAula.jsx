@@ -1,7 +1,8 @@
 import Navbar from "../layout/Navbar";
 import { useState } from 'react';
-import FormAula from "../formAula/FormAula";
+import { FormAula } from "../formAula/FormAula";
 import { useParams } from "react-router-dom";
+
 
 function EditAula() {
     const { id } = useParams();
@@ -26,10 +27,10 @@ function EditAula() {
             console.log('Erro ao editar aula', error);
         }
     }
-    
+
     return (
         <div>
-            <Navbar />
+            <Header />
             <FormAula
                 titulo='Editar Aula'
                 textoBotao='Salvar'

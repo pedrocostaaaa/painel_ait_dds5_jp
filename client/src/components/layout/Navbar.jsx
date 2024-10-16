@@ -2,27 +2,54 @@ import React from 'react';
 import styles from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
 
-function Navbar() {
+
+function Header() {
+  const menuShow = () => {
+    // Adicione a lógica para exibir/esconder o menu mobile aqui
+  };
+
   return (
-    <div className={`bg-primary ${styles.menu_navegacao}`}>
-      <nav className='container navbar navbar-expand-lg px-2'>
-        <div>
-          <span className='navbar-brand'>Nome Usuário</span>
+    <header>
+      <nav className="nav-bar">
+        <div className="logo">
+          <h1>ViverBem+</h1>
         </div>
-        <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#menu'>
-          <span className='navbar-toggler-icon'></span>
-        </button>
-        <div id='menu' className='collapse navbar-collapse text-center'>
-          <ul className='navbar-nav mx-auto'>
-            <li className="navbar-item"><NavLink className="nav-link" to=""> Início</NavLink></li>
-            <li className="navbar-item"><NavLink className="nav-link" to="/gestao_usuario"> Gestão Usuário</NavLink></li>
-            <li className="navbar-item"><NavLink className="nav-link" to="/import_csv"> Import CSV</NavLink></li>
-            <li className="navbar-item"><NavLink className="nav-link" to="/gestao_aulas"> Gestão Aulas</NavLink></li>
+
+        <div className="nav-list">
+          <ul>
+            <li className="nav-item">
+              <a href="#" className="nav-link">Página inicial</a>
+            </li>
+            <li className="nav-item">
+              <a href="#" className="nav-link">Login</a>
+            </li>
           </ul>
         </div>
+
+        <div className="mobile-menu-icon">
+          <button onClick={menuShow}>
+            {/* Adicione a lógica e a imagem do ícone do menu aqui */}
+            {/* <img className="icon" src="assets/img/menu_white_36dp.svg" alt="Menu Icon" /> */}
+          </button>
+        </div>
       </nav>
-    </div>
-  )
+
+      <div className="mobile-menu">
+        <ul>
+          <li className="nav-item">
+            <a href="#" className="nav-link">Página inicial</a>
+          </li>
+          <li className="nav-item">
+            <a href="#" className="nav-link">Login</a>
+          </li>
+        </ul>
+      </div>
+
+      <div className="logo-viver">
+        {/* <img src="img/LOGO_VIVER_BEM_+_2-removebg-preview (1).png" alt="Logo ViverBem+" className="logo-form" /> */}
+      </div>
+    </header>
+  );
 }
 
-export default Navbar;
+export default Header;
