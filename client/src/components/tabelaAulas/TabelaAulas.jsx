@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import AbreviaData from "./AbreviaData";
 import AbreviaAmbiente from "./AbreviaAmbiente";
+import styles from './TabelaAulas.module.css';
+import { Link } from "react-router-dom";
 
-function TabelaAulas() {
+function TabelaAulas({ tipo, onDeleteSuccess }) {
     const [aulas, setAulas] = useState([])
 
     useEffect(() => {
@@ -27,16 +29,42 @@ function TabelaAulas() {
             console.log('Erro ao consultar aulas', error)
         }
     }
+
+    async function deletarAulas(id) {
+        try {
+            const resposta = await fetch(`http://localhost:5000/aulas/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!resposta.ok) {
+                throw new Error('Erro ao deletar aula', JSON.stringify(resposta));
+            } else {
+                setAulas(aulas.filter(aula => aula.id !== id));
+                //alert('Aula deletada')
+                onDeleteSuccess();
+            }
+        } catch (error) {
+            console.debug(error);
+        }
+
+    }
+
     return (
-        <div>
-            <table>
+        <div className={`${styles.aulas}${tipo === 'edit' ? styles.edit : ''}`}>
+            <table className={styles.tabelaAulas}>
                 <thead>
-                    <th>Início</th>
-                    <th>Fim</th>
-                    <th>Turma</th>
-                    <th>Instrutor</th>
-                    <th>Unidade Curricular</th>
-                    <th>Ambiente</th>
+                    <tr>
+                        <th>Início</th>
+                        <th>Fim</th>
+                        <th>Turma</th>
+                        <th>Instrutor</th>
+                        <th>Unidade Curricular</th>
+                        <th>Ambiente</th>
+                        {tipo === 'edit' && <th>Ações</th>}
+                    </tr>
                 </thead>
                 <tbody>
                     {aulas.map((aula) => (
@@ -47,6 +75,14 @@ function TabelaAulas() {
                             <td>{aula.instrutor}</td>
                             <td>{aula.unidade_curricular}</td>
                             <td>{aula.ambiente}</td>
+                            {tipo === 'edit' &&
+                                <td>
+                                    <Link to={`/edit_aula/${aula.id}`} className="btn btn-warning">Editar</Link>
+                                    <button
+                                        className="btn btn-danger ms-2"
+                                        onClick={() => deletarAulas(aula.id)}
+                                    >Deletar</button>
+                                </td>}
                         </tr>
                     ))}
                 </tbody>
