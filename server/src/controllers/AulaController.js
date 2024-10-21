@@ -1,12 +1,20 @@
-import { createAula } from "../models/AulaModel.js";
+//Importando funções do AulaModel
+import { createAula, deleteAula, readAulas, updateAula, showOneAula } from "../models/AulaModel.js";
 
 export async function criarAula(req, res) {
+    //Ao ser chamado o criarAula controller virá no console
     console.log('AulaController criarAula');
+
+    //Criando constante com a requisição
     const aula = req.body;
 
+    //Exibindo corpo da requisição
+    console.log(aula);
+
+    //Tentando criar aula
     try {
         const [status, resposta] = await createAula(aula);
-        res.status().json(resposta);
+        res.status(status).json(resposta);
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -14,19 +22,64 @@ export async function criarAula(req, res) {
 }
 
 export async function mostrarAulas(req, res) {
-    return res.status(200).json(
-        [
-            {
-                "id": "c7e9",
-                "data": "2024-10-18",
-                "data_hora_inicio": "14:00",
-                "data_hora_fim": "15:30",
-                "turma": "sair cedo",
-                "instrutor": "pedro perfeito",
-                "unidade_curricular": "conforto & preguiça",
-                "ambiente": "sala, preferencia deitado",
-                "chave": null
-            }
-        ]
-    );
+    //Ao ser chamado o criarAula controller virá no console
+    console.log('AulaController mostrarAulas');
+
+    //Tentando mostrar aulas
+    try {
+        const [status, resposta] = await readAulas();
+        res.status(status).json(resposta);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+export async function atualizarAula(req, res) {
+    //Ao ser chamado o criarAula controller virá no console
+    console.log('AulaController atualizarAula');
+
+    //Criando constante com a requisição
+    const aula = req.body;
+    const { id } = req.params;
+
+    //Tentando mostrar aulas
+    try {
+        const [status, resposta] = await updateAula(aula, id);
+        res.status(status).json(resposta);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+export async function excluirAula(req, res) {
+    //Ao ser chamado o criarAula controller virá no console
+    console.log('AulaController excluirAula');
+
+    //Criando constante com a requisição
+    const { id } = req.params;
+
+    //Tentando deletar aula
+    try {
+        const [status, resposta] = await deleteAula(id);
+        res.status(status).json(resposta);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+export async function mostrarAula(req, res) {
+    console.log('AulaController mostrarUmaAula');
+
+    const { id } = req.params;
+
+    try {
+        const [status, resposta] = await showOneAula(id);
+        res.status(status).json(resposta);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
 }

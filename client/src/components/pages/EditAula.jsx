@@ -1,15 +1,14 @@
-import Navbar from "../layout/Navbar";
+import Navbar from '../layout/Navbar'
 import { useState } from 'react';
-import { FormAula } from "../formAula/FormAula";
-import { useParams } from "react-router-dom";
-
+import FormAula from '../formAula/FormAula';
+import { useParams } from 'react-router-dom';
 
 function EditAula() {
     const { id } = useParams();
 
     async function editarAula(infoAula, id) {
         try {
-            const resposta = await fetch(`http://localhost:5000/${id}`, {
+            const resposta = await fetch(`http://localhost:5000/aulas/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -18,11 +17,12 @@ function EditAula() {
             });
             if (!resposta.ok) {
                 const retorno = await resposta.json();
-                console.log('Erro ao editar aula', retorno);
+                console.log('Erro ao editar Aula', retorno);
             } else {
-                console.log('Aula editada')
+                console.log('Aula Editada')
                 //alert('Aula editada com sucesso')
             }
+
         } catch (error) {
             console.log('Erro ao editar aula', error);
         }
@@ -30,7 +30,7 @@ function EditAula() {
 
     return (
         <div>
-            <Header />
+            <Navbar />
             <FormAula
                 titulo='Editar Aula'
                 textoBotao='Salvar'

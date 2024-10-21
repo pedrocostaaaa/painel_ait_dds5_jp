@@ -1,15 +1,15 @@
 {
   "aulas": [
     {
-      "id": "c7e9",
-      "data": "2024-10-18",
-      "data_hora_inicio": "17:38",
-      "data_hora_fim": "14:40",
+      "data": "",
+      "data_hora_inicio": " ",
+      "data_hora_fim": " ",
       "turma": "bghh",
       "instrutor": "bdghd",
       "unidade_curricular": "ddghdfh",
-      "ambiente": "ddfgfgh",
-      "chave": null
+      "ambiente": "arr",
+      "chave": null,
+      "id": "c7e9"
     },
     {
       "id": "60e4",

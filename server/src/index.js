@@ -1,21 +1,36 @@
-import express from 'express'; // importando express
+//Importando express
+import express from 'express';
+//Importando cors
+import cors from 'cors';
 
-import cors from 'cors'; // importando cors
+//Importanto funções (metodos do controller)
+import { mostrarAulas,criarAula,atualizarAula, excluirAula } from './controllers/AulaController.js';
+import { showOneAula } from './models/AulaModel.js';
 
-import { mostrarAulas, criarAula } from './controllers/AulaController.js';// importando funções (métodos do controller)
 
-const app = express(); // chamando função express
+//Chamando função express
+const app = express();
 const porta = 5000;
 
-app.unsubscribe(cors()); // habilitando cors
+//Habilitando cors
+app.use(cors());
 
-app.get('/', (req, res) => { // rota padrão para teste de API
+//Habilitando JSON
+app.use(express.json());
+
+// Rota padrão para teste de API
+app.get('/',(req,res)=>{
     res.send('Teste de API funcionando')
 });
 
-app.post('/aulas', criarAula);
-app.get('/aulas', mostrarAulas); // rotas de aulas
+// Rotas de aulas
+app.post('/aulas',criarAula);
+app.get('/aulas',mostrarAulas);
+app.put('/aulas/:id',atualizarAula);
+app.delete('/aulas/:id',excluirAula);
+app.get('/aulas/:id', showOneAula);
 
-app.listen(porta, () => { // iniciando API e exibindo mensagem no console com a porta
-    console.log(`API rodando na porta ${porta}`)
+//Iniciando API e exibindo mensagem no console com a porta
+app.listen(porta,()=>{
+    console.log(`API Rodando na porta ${porta}`)
 });
